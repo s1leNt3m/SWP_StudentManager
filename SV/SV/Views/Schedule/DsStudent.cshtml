@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<SV.Models.StudentModels>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên sinh viên</th>
+                            <th>Điểm Danh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td>@item.Name</td>
+                                    <td>
+                                        <input class="form-check-input" type="checkbox" onclick="fnDiemDanh(this ,@item.Id, @item.Rank, @item.Session)" />
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function fnDiemDanh(that, studentId, rank, session, LopId) {
+        var IsDiemDanh = false
+        IsDiemDanh = ($(that).is(":checked"))
+        $.ajax({
+            url: "@Url.Action("DiemDanh", "Schedule")",
+            type: "POST",
+            dataType: "JSON",
+            cache: false,
+            data: {
+                StudentId: studentId,
+                Rank: rank,
+                Session: session,
+                LopId: LopId,
+                IsDiemDanh: IsDiemDanh,
+            },
+            success: function (data) {
+                alert("Điểm danh thành công.")
+            }
+        });
+    }
+</script>

@@ -1,0 +1,272 @@
+﻿@{
+    var user = Session["User"] as SV.Models.UserSession;
+    
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hệ Thống Điểm Danh</title>
+    <meta content="Đồ Án" name="description" />
+    <meta content="3T Software Technology" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="@Url.Content("~/Contents/assets/images/favicon.ico")">
+    <link href="@Url.Content("~/Contents/assets/libs/select2/css/select2.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Contents/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Contents/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Contents/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Contents/assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Contents/assets/libs/chenfengyuan/datepicker/datepicker.min.css")" rel="stylesheet" />
+    <!-- Sweet Alert-->
+    <link href="@Url.Content("~/Contents/assets/libs/sweetalert2/sweetalert2.min.css")" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap Css -->
+    <link href="@Url.Content("~/Contents/assets/css/bootstrap.min.css")" id="bootstrap-style" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="@Url.Content("~/Contents/assets/css/icons.min.css")" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="@Url.Content("~/Contents/assets/css/app.min.css")" id="app-style" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Contents/assets/libs/toastr/build/toastr.min.css")" rel="stylesheet" />
+
+
+    <!-- JAVASCRIPT -->
+    <script src="@Url.Content("~/Contents/assets/libs/jquery/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/bootstrap/js/bootstrap.bundle.min.js")"></script>
+
+</head>
+<body>
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+        <header id="page-topbar">
+            <div class="navbar-header">
+                <div class="d-flex">
+                    <!-- LOGO -->
+                    <div class="navbar-brand-box">
+                        <a href="index.html" class="logo logo-dark">
+                            <span class="logo-sm">
+                                <img src="@Url.Content("~/Contents/assets/images/logo-sm.png")" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="@Url.Content("~/Contents/assets/images/logo-dark.png")" alt="" height="20">
+                            </span>
+                        </a>
+
+                        <a href="index.html" class="logo logo-light">
+                            <span class="logo-sm">
+                                <img src="@Url.Content("~/Contents/assets/images/logo-sm.png")" alt="" height="22">
+                            </span>
+                            <span class="logo-lg">
+                                <img src="@Url.Content("~/Contents/assets/images/logo-light.png")" alt="" height="20">
+                            </span>
+                        </a>
+                    </div>
+
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+                        <i class="fa fa-fw fa-bars"></i>
+                    </button>
+
+                    <!-- App Search-->
+                    <form class="app-search d-none d-lg-block">
+                        <div class="position-relative">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="uil-search"></span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="d-flex">
+                    <div class="dropdown d-inline-block d-lg-none ms-2">
+                        <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="uil-search"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                             aria-labelledby="page-header-search-dropdown">
+                            <form class="p-3">
+                                <div class="m-0">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="dropdown d-inline-block">
+                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img class="rounded-circle header-profile-user" src="@Url.Content("~/Contents/assets/images/users/avatar-4.jpg")"
+                                 alt="Header Avatar">
+                            <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">Marcus</span>
+                            <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <!-- item-->
+                            <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
+                            <a class="dropdown-item" href="#"><i class="uil uil-wallet font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">My Wallet</span></a>
+                            <a class="dropdown-item d-block" href="#"><i class="uil uil-cog font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Settings</span> <span class="badge bg-soft-success rounded-pill mt-1 ms-2">03</span></a>
+                            <a class="dropdown-item" href="#"><i class="uil uil-lock-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Lock screen</span></a>
+                            <a class="dropdown-item" href="#"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out</span></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="vertical-menu">
+            <!-- LOGO -->
+            <div class="navbar-brand-box">
+                <a href="index.html" class="logo logo-dark">
+                    <span class="logo-sm">
+                        <img src="@Url.Content("~/Contents/assets/images/logo-sm.png")" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="@Url.Content("~/Contents/assets/images/logo-dark.png")" alt="" height="20">
+                    </span>
+                </a>
+
+                <a href="index.html" class="logo logo-light">
+                    <span class="logo-sm">
+                        <img src="@Url.Content("~/Contents/assets/images/logo-sm.png")" alt="" height="22">
+                    </span>
+                    <span class="logo-lg">
+                        <img src="@Url.Content("~/Contents/assets/images/logo-light.png")" alt="" height="20">
+                    </span>
+                </a>
+            </div>
+
+            <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect vertical-menu-btn">
+                <i class="fa fa-fw fa-bars"></i>
+            </button>
+
+            <div data-simplebar class="sidebar-menu-scroll">
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+                    <!-- Left Menu Start -->
+                    <ul class="metismenu list-unstyled" id="side-menu">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <i class="uil-home-alt"></i><span>Dashboard</span>
+                            </a>
+                        </li>
+                        @if (user.Role != SV.Enum.RoleEnum.STUDENT)
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Class")" class="waves-effect">
+                                    <i class="uil-user-circle"></i>
+                                    <span>Quản Lý Lớp Học</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("Index", "Student")" class="waves-effect">
+                                    <i class="uil-user-circle"></i>
+                                    <span>Quản Lý Sinh Viên</span>
+                                </a>
+                            </li>
+                        }
+
+                        <li>
+                            <a href="@Url.Action("Index", "Schedule")" class="waves-effect">
+                                <i class="uil-user-circle"></i>
+                                <span>Quản Lý Lịch Học</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- Sidebar -->
+            </div>
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <script>document.write(new Date().getFullYear())</script> © 3T Software Technology.
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+
+
+    <script src="@Url.Content("~/Contents/assets/libs/metismenu/metisMenu.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/simplebar/simplebar.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/node-waves/waves.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/waypoints/lib/jquery.waypoints.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/jquery.counterup/jquery.counterup.min.js")"></script>
+
+    <!-- Sweet Alerts js -->
+    <script src="@Url.Content("~/Contents/assets/js/pages/sweetalert2.min.js")"></script>
+
+    <!-- Sweet alert init js-->
+    <script src="@Url.Content("~/Contents/assets/js/pages/sweet-alerts.init.js")"></script>
+
+    <!-- form repeater js -->
+    <script src="@Url.Content("~/Contents/assets/libs/jquery.repeater/jquery.repeater.min.js")"></script>
+
+    <!-- App js -->
+    <script src="@Url.Content("~/Contents/assets/js/app.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/toastr/build/toastr.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/datatables.net/js/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js")"></script>
+
+    <script src="@Url.Content("~/Contents/assets/libs/chenfengyuan/datepicker/datepicker.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/js/pages/datatables.init.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/libs/select2/js/select2.min.js")"></script>
+    <script src="@Url.Content("~/Contents/assets/js/pages/form-advanced.init.js")"></script>
+
+    <script src="@Url.Content("~/Contents/assets/BaseCommons.js")"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+
+            $('.select2_multiple').select2()
+        })
+    </script>
+</body>
+</html>
+@if (TempData["MessagesSuccessful"] != null)
+{
+    <script type="text/javascript">
+         toastr["success"]('@TempData["MessagesSuccessful"].ToString()')
+    </script>
+}
+
+@if (TempData["MessagesError"] != null)
+{
+    <script type="text/javascript">
+         toastr["error"]('@TempData["MessagesError"].ToString()')
+    </script>
+}
+
+@if (TempData["MessagesWarning"] != null)
+{
+    <script type="text/javascript">
+        toastr["warning"]('@TempData["MessagesWarning"].ToString()')
+    </script>
+}

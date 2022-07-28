@@ -1,0 +1,198 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SV.Models.ClassModels
+
+<div class="account-management">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4>Quản lý lớp học</h4>
+                        <div class="page-title-right">
+                            <a href="@Url.Action("Edit", "Class")" class="btn btn-outline-info">Chỉnh sửa</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Edit", "Class", FormMethod.Post, new { @id = "form-create", @class = "form-horizontal needs-validation", @enctype = "multipart/form-data" }))
+    {
+        <div class="row form-horizontal form-label-left" style="margin-bottom:15px;">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <fieldset style="width: 100%">
+                            <legend>Thông tin chung</legend>
+                            <div class="first-step-group-criteria" style="padding-top:10px; margin-bottom: 10px;">
+                                <div class="form-row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label>Tên lớp học <sup class="text-danger">*</sup></label>
+                                                @Html.HiddenFor(model => model.Id)
+                                                @Html.HiddenFor(model => model.CreatedBy)
+                                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Tên lớp học", @autocomplete = "off", @required = "@required" })
+                                                @Html.ValidationMessageFor(model => model.Name, null, new { @class = "label label-danger text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label>Môn học <sup class="text-danger">*</sup></label>
+                                                @Html.DropDownListFor(model => model.SubjectId,
+                                                    new SelectList(ViewBag.Subjects, "Id", "Name", Model.SubjectId), null,
+                                                    new
+                                                    {
+                                                        @class = "form-control custom-select",
+                                                        @style = "width:100%;",
+                                                        @id = "SubjectId"
+                                                    })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-12 mb-3">
+                                                <label>Danh sách sinh viên <sup class="text-danger">*</sup></label>
+                                                @Html.DropDownListFor(model => model.SinhVienIds,
+                                                    new SelectList(ViewBag.SinhViens, "Id", "Name", Model.SinhVienIds), null,
+                                                    new
+                                                    {
+                                                        @class = "form-control select2_multiple custom-select",
+                                                        @style = "width:100%;",
+                                                        @id = "SinhVienIds",
+                                                        @multiple = true
+                                                    })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <h5>Thông tin chi tiết lịch học cho lớp:</h5>
+                                            <table class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Thứ</th>
+                                                        <th>Buổi sáng</th>
+                                                        <th>Buổi chiều</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            Thứ 2 @Html.CheckBoxFor(m => m.TimeLines.Thu2)
+                                                        </td>
+                                                        <td>
+                                                            Sáng @Html.CheckBoxFor(m => m.TimeLines.CheckBoxSangT2)
+                                                        </td>
+                                                        <td>
+                                                            Chiều @Html.CheckBoxFor(m => m.TimeLines.CheckBoxChieuT2)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Thứ 3 @Html.CheckBoxFor(m => m.TimeLines.Thu3)
+                                                        </td>
+                                                        <td>
+                                                            Sáng @Html.CheckBoxFor(m => m.TimeLines.CheckBoxSangT3)
+                                                        </td>
+                                                        <td>
+                                                            Chiều @Html.CheckBoxFor(m => m.TimeLines.CheckBoxChieuT3)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Thứ 4 @Html.CheckBoxFor(m => m.TimeLines.Thu4)
+                                                        </td>
+                                                        <td>
+                                                            Sáng @Html.CheckBoxFor(m => m.TimeLines.CheckBoxSangT4)
+                                                        </td>
+                                                        <td>
+                                                            Chiều @Html.CheckBoxFor(m => m.TimeLines.CheckBoxChieuT4)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Thứ 5 @Html.CheckBoxFor(m => m.TimeLines.Thu5)
+                                                        </td>
+                                                        <td>
+                                                            Sáng @Html.CheckBoxFor(m => m.TimeLines.CheckBoxSangT5)
+                                                        </td>
+                                                        <td>
+                                                            Chiều @Html.CheckBoxFor(m => m.TimeLines.CheckBoxChieuT5)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Thứ 6 @Html.CheckBoxFor(m => m.TimeLines.Thu6)
+                                                        </td>
+                                                        <td>
+                                                            Sáng @Html.CheckBoxFor(m => m.TimeLines.CheckBoxSangT6)
+                                                        </td>
+                                                        <td>
+                                                            Chiều @Html.CheckBoxFor(m => m.TimeLines.CheckBoxChieuT6)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Thứ 7 @Html.CheckBoxFor(m => m.TimeLines.Thu7)
+                                                        </td>
+                                                        <td>
+                                                            Sáng @Html.CheckBoxFor(m => m.TimeLines.CheckBoxSangT7)
+                                                        </td>
+                                                        <td>
+                                                            Chiều @Html.CheckBoxFor(m => m.TimeLines.CheckBoxChieuT7)
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            Chủ nhật @Html.CheckBoxFor(m => m.TimeLines.Thu0)
+                                                        </td>
+                                                        <td>
+                                                            Sáng @Html.CheckBoxFor(m => m.TimeLines.CheckBoxSangT0)
+                                                        </td>
+                                                        <td>
+                                                            Chiều @Html.CheckBoxFor(m => m.TimeLines.CheckBoxChieuT0)
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-3">
+                                                <label></label>
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox mr-sm-2">
+                                                        @Html.CheckBoxFor(model => model.IsActive, new { @class = "icheck custom-control-input", @id = "active" })
+                                                        <label class="custom-control-label" for="active">Status</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="text-right">
+                            <a href="@Url.Action("Index","Class")" class="btn btn-default">Thoát</a>
+                            <button class="btn btn-primary" type="submit">Lưu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        var _SinhVienIds = '@Html.Raw(Json.Encode(Model.SinhVienIds))'
+        if (_SinhVienIds.length > 0) {
+            $('#SinhVienIds').val(JSON.parse(_SinhVienIds)).trigger("change");
+        }
+    })
+</script>
+

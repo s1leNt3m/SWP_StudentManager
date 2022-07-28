@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SV.Models.ClassModels
+
+<div class="account-management">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4>Quản lý lớp học</h4>
+                        <div class="page-title-right">
+                            <a href="@Url.Action("New", "Class")" class="btn btn-outline-info">Thêm mới</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("New", "Class", FormMethod.Post, new { @id = "form-create", @class = "form-horizontal needs-validation", @enctype = "multipart/form-data" }))
+    {
+        @Html.Partial("_Form", Model)
+    }
+</div>
+
+

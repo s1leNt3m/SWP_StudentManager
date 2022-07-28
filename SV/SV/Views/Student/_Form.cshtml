@@ -1,0 +1,34 @@
+﻿@{
+    Layout = null;
+}
+@model SV.Models.UserModels
+<div class="row form-horizontal form-label-left" style="margin-bottom:15px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <fieldset style="width: 100%">
+                    <legend>Thông tin chung</legend>
+                    <div class="first-step-group-criteria" style="padding-top:10px; margin-bottom: 10px;">
+                        <div class="form-row">
+                            <div class="col-md-8 mb-3">
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Tên sinh viên <sup class="text-danger">*</sup></label>
+                                        @Html.HiddenFor(model => model.Id)
+                                        @Html.HiddenFor(model => model.CreatedBy)
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Tên sinh viên", @autocomplete = "off", @required = "@required" })
+                                        @Html.ValidationMessageFor(model => model.Name, null, new { @class = "label label-danger text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="text-right">
+                    <a href="@Url.Action("Index","Student")" class="btn btn-default">Thoát</a>
+                    <button class="btn btn-primary" type="submit">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
