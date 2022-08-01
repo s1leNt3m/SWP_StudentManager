@@ -1,0 +1,93 @@
+﻿@{
+    Layout = null;
+}
+@model SV.Models.UserPointModels
+<div class="row form-horizontal form-label-left" style="margin-bottom:15px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <fieldset style="width: 100%">
+                    <legend>Thông tin chung</legend>
+                    <div class="first-step-group-criteria" style="padding-top:10px; margin-bottom: 10px;">
+                        <div class="form-row">
+                            <div class="mb-3">
+                                <div class="form-row mb-3">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label">Chọn năm học:</label>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownList("Year",
+                                                        new SelectList(ViewBag.NamHoc, "Value", "Text", Model.Year), null,
+                                                        new
+                                                        {
+                                                            @class = "form-control custom-select",
+                                                            @style = "",
+                                                            @id = "namHoc"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label">Chọn học kỳ:</label>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownList("Periods",
+                                                        new SelectList(ViewBag.HocKy, "Value", "Text", Model.Periods), null,
+                                                        new
+                                                        {
+                                                            @class = "form-control custom-select",
+                                                            @style = "",
+                                                            @id = "hocKy"
+                                                        })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="row">
+                                                <label class="col-md-4 col-form-label">Chọn sinh viên:</label>
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => model.SinhVienId,
+                                                     new SelectList(ViewBag.SinhViens, "Id", "Name", Model.SinhVienId), null,
+                                                     new
+                                                     {
+                                                         @class = "form-control custom-select",
+                                                         @style = "width:100%;",
+                                                         @id = "SinhVienIds"
+                                                     })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Điểm chuyên cần <sup class="text-danger">*</sup></label>
+                                            @Html.TextBoxFor(model => model.PointStudy, new { @class = "form-control", @autocomplete = "off", @required = "@required", @type = "number" ,@Min ="0" , @Max ="10"})
+                                            @Html.ValidationMessageFor(model => model.PointStudy, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Điểm giữa kỳ <sup class="text-danger">*</sup></label>
+                                            @Html.TextBoxFor(model => model.PointGK, new { @class = "form-control", @autocomplete = "off", @required = "@required", @type = "number", @Min = "0", @Max = "10" })
+                                            @Html.ValidationMessageFor(model => model.PointGK, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Điểm cuối kỳ <sup class="text-danger">*</sup></label>
+                                            @Html.TextBoxFor(model => model.PointCK, new { @class = "form-control", @autocomplete = "off", @required = "@required", @type = "number", @Min = "0", @Max = "10" })
+                                            @Html.ValidationMessageFor(model => model.PointCK, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="text-right">
+                    <a href="@Url.Action("Index","StudentPoint")" class="btn btn-default">Thoát</a>
+                    <button class="btn btn-primary" type="submit">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

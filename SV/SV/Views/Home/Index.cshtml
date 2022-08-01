@@ -1,0 +1,103 @@
+﻿@{
+    var user = Session["User"] as SV.Models.UserSession;
+    var schedule = ViewData["Schedule"] as List<SV.Models.UserScheduleModels>;
+}
+@model List<SV.Models.UserPointModels>
+@if (user != null && user.Role == SV.Enum.RoleEnum.STUDENT)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Điểm chuyên cần</th>
+                            <th>Điểm giữa kỳ</th>
+                            <th>Điểm cuối kỳ</th>
+                        </tr>
+                        @if (Model != null)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.PointStudy</td>
+                                    <td>@item.PointGK</td>
+                                    <td>@item.PointCK</td>
+                                </tr>
+                            }
+                        }
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>STT</th>
+                            <th>Lớp học</th>
+                            <th>Ngày</th>
+                            <th>Ca</th>
+                        </tr>
+                        @if (schedule != null && schedule.Any())
+                        {
+                            int index = 1;
+                            foreach (var item in schedule)
+                            {
+                                <tr>
+                                    <td>@index</td>
+                                    <td>@item.LopName</td>
+                                    <td>@item.Rank</td>
+                                    <td>@item.Session</td>
+                                </tr>
+                                index = index + 1;
+                            }
+                        }
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h4 class="mb-1 mt-1">
+                            THÔNG TIN NGƯỜI DÙNG
+                        </h4>
+                    </div>
+                    <div class="p-2 mt-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-control">
+                                    Tổng số người dùng Quản trị: @ViewBag.ND
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-control">
+                                    Tổng số người dùng Giáo viên: @ViewBag.GV
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-control">
+                                    Tổng số Sinh viên: @ViewBag.SV
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SV.Models.UserModels
+
+<div class="account-management">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4>Quản lý sinh viên</h4>
+                        <div class="page-title-right">
+                            <a href="@Url.Action("Edit", "Student")" class="btn btn-outline-info">Chỉnh sửa</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @using (Html.BeginForm("Edit", "Student", FormMethod.Post, new { @id = "form-create", @class = "form-horizontal needs-validation", @enctype = "multipart/form-data" }))
+    {
+        @Html.Partial("_Form", Model)
+    }
+</div>
+

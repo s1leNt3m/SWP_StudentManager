@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = Session["User"] as SV.Models.UserSession;
+}
+@model List<SV.Models.ClassModels>
+
+<div class="account-management">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4>Quản lý khóa học</h4>
+                        <div class="page-title-right">
+                            <a href="@Url.Action("New", "Class")" class="btn btn-outline-info">Thêm mới</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive m-t-40">
+                        <table id="config-table" class="table table-bordered dt-responsive nowrap dataTable no-footer dtr-inline" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th data-priority="1" style="max-width:25px !important;">No.</th>
+                                    <th data-priority="1">Mã môn học</th>
+                                    <th data-priority="1">Tên môn học</th>
+                                    
+                                    <th data-priority="1">Điều chỉnh</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.Any())
+                                {
+                                    var No = 0;
+                                    foreach (var item in Model)
+                                    {
+                                        No = No + 1;
+                                        <tr>
+                                            <td>@No</td>
+                                            <td>@item.Code</td>
+                                            <td>@item.Name</td>
+                                          
+                                            <td style="width: 12%">
+                                                <div class="btn-group btn-group-3 pull-right">
+                                                    <a href="@Url.Action("Edit","Class", new { Id = item.Id })" role="button" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Update information">
+                                                        <i class="fas fa-fw fa-pencil-alt text-success"></i>
+                                                    </a>
+
+                                                    <a href="javascript:void(0)" onclick="ConfirmSwalMessage('@string.Format("Bạn có chắc chắn muốn xóa lớp học <br/> [{0}]", item.Name)','', 'Agree', 'Cancel','@Url.Action("Destroy", "Class", new { Id = item.Id })')" class="btn btn-outline-secondary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Delete information ">
+                                                        <i class="fa fa-fw fa-trash text-danger"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#config-table').DataTable({
+        responsive: true
+    });
+</script>

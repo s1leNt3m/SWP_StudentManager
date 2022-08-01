@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+@model SV.Models.ClassModels
+<div class="row form-horizontal form-label-left" style="margin-bottom:15px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <fieldset style="width: 100%">
+                    <legend>Thông tin chung</legend>
+                    <div class="first-step-group-criteria" style="padding-top:10px; margin-bottom: 10px;">
+                        <div class="form-row">
+                            <div class=" mb-3">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Mã lớp học <sup class="text-danger">*</sup></label>
+                                        @Html.HiddenFor(model => model.Id)
+                                        @Html.HiddenFor(model => model.CreatedBy)
+                                        @Html.TextBoxFor(model => model.Code, new { @class = "form-control", placeholder = "Mã lớp học", @autocomplete = "off", @required = "@required" })
+                                        @Html.ValidationMessageFor(model => model.Code, null, new { @class = "label label-danger text-danger" })
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Tên lớp học <sup class="text-danger">*</sup></label>
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Tên lớp học", @autocomplete = "off", @required = "@required" })
+                                        @Html.ValidationMessageFor(model => model.Name, null, new { @class = "label label-danger text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    @*<div class="col-md-6 mb-3">
+                                        <label>Price <sup class="text-danger">*</sup></label>
+                                        @Html.TextBoxFor(model => model.Price, new { @class = "form-control", placeholder = "Price", @autocomplete = "off", @type="number" })
+                                        @Html.ValidationMessageFor(model => model.Price, null, new { @class = "label label-danger text-danger" })
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label></label>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox mr-sm-2">
+                                                @Html.CheckBoxFor(model => model.IsActive, new { @class = "icheck custom-control-input", @id = "active" })
+                                                <label class="custom-control-label" for="active">Status</label>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="text-right">
+                    <a href="@Url.Action("Index","Class")" class="btn btn-default">Thoát</a>
+                    <button class="btn btn-primary" type="submit">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

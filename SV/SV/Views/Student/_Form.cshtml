@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+@model SV.Models.UserModels
+<div class="row form-horizontal form-label-left" style="margin-bottom:15px;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <fieldset style="width: 100%">
+                    <legend>Thông tin chung</legend>
+                    <div class="first-step-group-criteria" style="padding-top:10px; margin-bottom: 10px;">
+                        <div class="form-row">
+                            <div class="mb-3">
+                                <div class="form-row">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Mã sinh viên <sup class="text-danger">*</sup></label>
+                                            @Html.HiddenFor(model => model.Id)
+                                            @Html.HiddenFor(model => model.CreatedBy)
+                                            @Html.TextBoxFor(model => model.Code, new { @class = "form-control", placeholder = "Mã sinh viên", @autocomplete = "off", @required = "@required" })
+                                            @Html.ValidationMessageFor(model => model.Code, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Tên sinh viên <sup class="text-danger">*</sup></label>
+                                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Tên sinh viên", @autocomplete = "off", @required = "@required" })
+                                            @Html.ValidationMessageFor(model => model.Name, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Email <sup class="text-danger">*</sup></label>
+                                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email", @autocomplete = "off", @required = "@required" })
+                                            @Html.ValidationMessageFor(model => model.Email, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Số điện thoại <sup class="text-danger">*</sup></label>
+                                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = "SĐT", @autocomplete = "off", @required = "@required", @type = "number" })
+                                            @Html.ValidationMessageFor(model => model.Phone, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label>Mật khẩu <sup class="text-danger">*</sup></label>
+                                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Mật khẩu", @autocomplete = "off", @required = "@required" })
+                                            @Html.ValidationMessageFor(model => model.Password, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Xác nhận mật khẩu <sup class="text-danger">*</sup></label>
+                                            @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Xác nhận mật khẩu", @autocomplete = "off", @required = "@required" })
+                                            @Html.ValidationMessageFor(model => model.ConfirmPassword, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label>Địa chỉ <sup class="text-danger">*</sup></label>
+                                            @Html.TextAreaFor(model => model.Address, new { @class = "form-control", placeholder = "Địa chỉ", @autocomplete = "off", @row = 3 })
+                                            @Html.ValidationMessageFor(model => model.Address, null, new { @class = "label label-danger text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="text-right">
+                    <a href="@Url.Action("Index","Student")" class="btn btn-default">Thoát</a>
+                    <button class="btn btn-primary" type="submit">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
